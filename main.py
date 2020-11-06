@@ -7,10 +7,6 @@ from time import sleep
 
 tweet_frequency_mins = int(os.getenv("TWEET_FREQUENCY_MINS"))
 
-os.environ["SPOTIPY_CLIENT_ID"] = "b341c59fe4b7404d80f3a9b104c63822"
-os.environ["SPOTIPY_CLIENT_SECRET"] = "dc4c2c461d824042b199ae430b2ef8cd"
-os.environ["SPOTIPY_REDIRECT_URI"] = "http://localhost:8888/callback/"
-
 username = "bekoo757"
 
 scope = 'user-read-currently-playing'
@@ -44,7 +40,7 @@ while True: # Iterates every 2 minutes checks for a song
   ##############################
   #### Genius API
 
-  GENIUS_CLIENT_ID = "MM9djKni9Mquv0klm0peaYuGvH3r2wT13KxaF1rSX3N9hNA-6DYWU90PhqkBaLgh"
+  GENIUS_CLIENT_ID = os.getenv("GENIUS_CLIENT_ID")
   genius = lyricsgenius.Genius(GENIUS_CLIENT_ID)
 
   song = genius.search_song(song_name, artist_name)
@@ -79,13 +75,13 @@ while True: # Iterates every 2 minutes checks for a song
   ##############################
   #### Twitter API
 
-  consumer_key =    'nsObgpOuFpytQDX6YQdXgTzLB'
-  consumer_secret = '48A68WvbO7YTOBoXZ566CCJE0RBzRuMuucS5K2V4jGW3t0LeOY'
-  access_token =    '1324426316695932928-M42ziiKmoThiEkS1C401eKcv2CVz6M'
-  access_secret =   'qKN5hl9bQq4ret79uwpz6Cq7jBNzt87h4ulYf0w7KChSk'
+  tw_consumer_key = os.getenv("TWITTER_CONSUMER_KEY")
+  tw_consumer_secret = os.getenv("TWITTER_CONSUMER_SECRET")
+  tw_access_token = os.getenv("TWITTER_ACCESS_TOKEN")
+  tw_access_secret = os.getenv("TWITTER_ACCESS_SECRET")
 
-  auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-  auth.set_access_token(access_token, access_secret)
+  auth = tweepy.OAuthHandler(tw_consumer_key, tw_consumer_secret)
+  auth.set_access_token(tw_access_token, tw_access_secret)
   api = tweepy.API(auth)
 
   api.update_status(tweet)  # Tweet the verse
