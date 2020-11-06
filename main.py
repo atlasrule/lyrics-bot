@@ -49,7 +49,12 @@ while True: # Iterates every 2 minutes checks for a song
 
   song = genius.search_song(song_name, artist_name)
 
-  lyrics = song.lyrics
+  try:
+    lyrics = song.lyrics
+  except ( AttributeError):
+    print("\nCouldn't get lyrics.\n")
+    sleep(60 * tweet_frequency_mins)
+    continue
 
   ##############################
   #### Create tweet's text
