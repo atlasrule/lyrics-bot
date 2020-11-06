@@ -73,10 +73,10 @@ while True: # Iterates every 2 minutes checks for a song
 
   tweet = choice(lyrics) + "\n\n({} - {})".format(artist_name, song_name)
 
-if len(tweet) >= 280:
-  trimmed_tweet = trimmed_tweet = "\n".join(tweet.strip().split("\n")[0:4])  # First 4 lines
-  trimmed_tweet += "\n\n" + tweet.strip().split("\n")[-1]  # Last Line
-  tweet = trimmed_tweet
+  if len(tweet) >= 280:
+    trimmed_tweet = trimmed_tweet = "\n".join(tweet.strip().split("\n")[0:4])  # First 4 lines
+    trimmed_tweet += "\n\n" + tweet.strip().split("\n")[-1]  # Last Line
+    tweet = trimmed_tweet
 
   ##############################
   #### Twitter API
