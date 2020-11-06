@@ -5,7 +5,7 @@ from time import sleep
 ##############################
 #### Spotify API
 
-tweet_frequency_mins = os.getenv("TWEET_FREQUENCY_MINS")
+tweet_frequency_mins = int(os.getenv("TWEET_FREQUENCY_MINS"))
 
 os.environ["SPOTIPY_CLIENT_ID"] = "b341c59fe4b7404d80f3a9b104c63822"
 os.environ["SPOTIPY_CLIENT_SECRET"] = "dc4c2c461d824042b199ae430b2ef8cd"
