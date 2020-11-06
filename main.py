@@ -74,8 +74,7 @@ while True: # Iterates every 2 minutes checks for a song
   if len(tweet) >= 280:
     trimmed_tweet = tweet.strip().split("\n")[0:4]  # First 4 lines
     trimmed_tweet += tweet.strip().split("\n")[-1]  # Last Line
-
-  tweet = trimmed_tweet
+    tweet = trimmed_tweet
 
   ##############################
   #### Twitter API
