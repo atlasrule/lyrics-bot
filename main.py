@@ -5,6 +5,8 @@ from time import sleep
 ##############################
 #### Spotify API
 
+tweet_frequency_mins = os.getenv("TWEET_FREQUENCY_MINS")
+
 os.environ["SPOTIPY_CLIENT_ID"] = "b341c59fe4b7404d80f3a9b104c63822"
 os.environ["SPOTIPY_CLIENT_SECRET"] = "dc4c2c461d824042b199ae430b2ef8cd"
 os.environ["SPOTIPY_REDIRECT_URI"] = "http://localhost:8888/callback/"
@@ -24,7 +26,7 @@ while True: # Iterates every 2 minutes checks for a song
 
   if current_song == None:
     print("\nNot listening anything.\n")
-    sleep(60 * 60 * 2)
+    sleep(60 * tweet_frequency_mins)
     continue
 
   artist_name = current_song['item']['artists'][0]['name']
@@ -33,7 +35,7 @@ while True: # Iterates every 2 minutes checks for a song
 
   if song_name == last_tweeted:
     print("\nSong already tweeted.\n")
-    sleep(60 * 60 * 2)
+    sleep(60 * tweet_frequency_mins)
     continue
     
   print("\n", "   Artist name:", artist_name, end="\n\n")
@@ -79,3 +81,5 @@ while True: # Iterates every 2 minutes checks for a song
   api.update_status(tweet)  # Tweet the verse
 
   last_tweeted = song_name
+
+  sleep(60 * tweet_frequency_mins)
