@@ -2,10 +2,17 @@ import os, re, spotipy, lyricsgenius, tweepy
 from random import choice
 from time import sleep
 
+tweet_frequency_mins = int(os.getenv("TWEET_FREQUENCY_MINS"))
+
+GENIUS_CLIENT_ID = os.getenv("GENIUS_CLIENT_ID")
+
+tw_consumer_key = os.getenv("TWITTER_CONSUMER_KEY")
+tw_consumer_secret = os.getenv("TWITTER_CONSUMER_SECRET")
+tw_access_token = os.getenv("TWITTER_ACCESS_TOKEN")
+tw_access_secret = os.getenv("TWITTER_ACCESS_SECRET")
+
 ##############################
 #### Spotify API
-
-tweet_frequency_mins = int(os.getenv("TWEET_FREQUENCY_MINS"))
 
 username = "bekoo757"
 
@@ -40,7 +47,6 @@ while True: # Iterates every 2 minutes checks for a song
   ##############################
   #### Genius API
 
-  GENIUS_CLIENT_ID = os.getenv("GENIUS_CLIENT_ID")
   genius = lyricsgenius.Genius(GENIUS_CLIENT_ID)
 
   song = genius.search_song(song_name, artist_name)
@@ -74,11 +80,6 @@ while True: # Iterates every 2 minutes checks for a song
 
   ##############################
   #### Twitter API
-
-  tw_consumer_key = os.getenv("TWITTER_CONSUMER_KEY")
-  tw_consumer_secret = os.getenv("TWITTER_CONSUMER_SECRET")
-  tw_access_token = os.getenv("TWITTER_ACCESS_TOKEN")
-  tw_access_secret = os.getenv("TWITTER_ACCESS_SECRET")
 
   auth = tweepy.OAuthHandler(tw_consumer_key, tw_consumer_secret)
   auth.set_access_token(tw_access_token, tw_access_secret)
