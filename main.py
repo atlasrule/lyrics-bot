@@ -13,8 +13,7 @@ TWITTER_CONSUMER_SECRET = os.getenv("TWITTER_CONSUMER_SECRET")
 TWITTER_ACCESS_TOKEN = os.getenv("TWITTER_ACCESS_TOKEN")
 TWITTER_ACCESS_SECRET = os.getenv("TWITTER_ACCESS_SECRET")
 
-##############################
-#### Spotify API
+#### Get current listening data from Spotify
 
 scope = 'user-read-currently-playing'
 
@@ -44,8 +43,7 @@ while True: # Iterates every 2 minutes checks for a song
   print("\n", "   Artist name:", artist_name, end="\n\n")
   print(     "    Song name:", song_name, end="\n\n")
 
-  ##############################
-  #### Genius API
+  #### Get song's lyrics from Genius
 
   genius = lyricsgenius.Genius(GENIUS_CLIENT_ID)
 
@@ -53,12 +51,11 @@ while True: # Iterates every 2 minutes checks for a song
 
   try:
     lyrics = song.lyrics
-  except ( AttributeError):
+  except ( AttributeError): #if return None
     print("\nCouldn't get lyrics.\n")
     sleep(60 * TWEET_FREQUENCY_MINS)
     continue
 
-  ##############################
   #### Create tweet's text
 
   lyrics = re.sub(r'[\(\[].*?[\)\]]', '', lyrics)  # Remove lyric identifiers
@@ -78,8 +75,7 @@ while True: # Iterates every 2 minutes checks for a song
     trimmed_tweet += "\n\n" + tweet.strip().split("\n")[-1]  # Last Line
     tweet = trimmed_tweet
 
-  ##############################
-  #### Twitter API
+  #### Send the tweet with Twitter API
 
   auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
   auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET)
