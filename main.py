@@ -3,12 +3,16 @@ from random import choice
 from time import sleep
 
 def follow_back():
-  followers=[api.followers()]
-  following=[api.friends()]
-  for follower in followers:
-      if not follower in following:            
-          api.create_friendship(follower)
-          print('Followed ' + follower.screen_name + ' back.')
+  
+  for follower in tweepy.Cursor(api.followers).items():
+    follower.follow()
+
+#  followers=[api.followers()]
+#  following=[api.friends()]
+#  for follower in followers:
+#      if not follower in following:            
+#          api.create_friendship(follower)
+#          print('Followed ' + follower.screen_name + ' back.')
 
 TWEET_FREQUENCY_MINS = int(os.getenv("TWEET_FREQUENCY_MINS"))
 
