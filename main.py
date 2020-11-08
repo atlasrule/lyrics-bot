@@ -2,6 +2,8 @@ import os, re, spotipy, lyricsgenius, tweepy
 from random import choice
 from time import sleep
 
+print("SCRIPT IS RUNNING")
+
 def follow_back():
 
   for follower in tweepy.Cursor(api.followers).items():
