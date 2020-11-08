@@ -5,8 +5,12 @@ from time import sleep
 def follow_back():
 
   for follower in tweepy.Cursor(api.followers).items():
-    follower.follow()
-    print('Followed', follower.screen_name, 'back :)')
+
+    try:
+      follower.follow()
+    except TwitterError:
+        continue    
+      print('Followed', follower.screen_name, 'back :)')
 
 #  followers=[api.followers()]
 #  following=[api.friends()]
