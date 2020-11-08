@@ -47,6 +47,8 @@ while True: # Iterates every 2 minutes checks for a song
 
   song_name = current_song['item']['name']
 
+  print('DEBUG_0')
+
   if song_name == last_tweeted:
     print("\nSong already tweeted.\n")
     sleep(60 * TWEET_FREQUENCY_MINS)
@@ -61,12 +63,16 @@ while True: # Iterates every 2 minutes checks for a song
 
   song = genius.search_song(song_name, artist_name)
 
+  print('DEBUG_1')
+
   try:
     lyrics = song.lyrics
   except ( AttributeError): #if return None
     print("\nCouldn't get lyrics.\n")
     sleep(60 * TWEET_FREQUENCY_MINS)
   continue
+
+  print('DEBUG_2')
 
   #### Create tweet's text
 
@@ -86,6 +92,9 @@ while True: # Iterates every 2 minutes checks for a song
     trimmed_tweet = trimmed_tweet = "\n".join(tweet.strip().split("\n")[0:4])  # First 4 lines
     trimmed_tweet += "\n\n" + tweet.strip().split("\n")[-1]  # Last Line
     tweet = trimmed_tweet
+
+
+  print('DEBUG_3')
 
   #### Send the tweet with Twitter API
 
