@@ -49,7 +49,7 @@ while True: # Iterates every 2 minutes checks for a song
     print("\nSong already tweeted.\n")
     sleep(60 * TWEET_FREQUENCY_MINS)
     continue
-    
+
   print("\n", "   Artist name:", artist_name, end="\n\n")
   print(     "    Song name:", song_name, end="\n\n")
 
