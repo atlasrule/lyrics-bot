@@ -70,7 +70,7 @@ while True: # Iterates every 2 minutes checks for a song
   except ( AttributeError): #if return None
     print("\nCouldn't get lyrics.\n")
     sleep(60 * TWEET_FREQUENCY_MINS)
-  continue
+    continue
 
   print('DEBUG_2')
 
