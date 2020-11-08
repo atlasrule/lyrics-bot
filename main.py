@@ -2,12 +2,8 @@ import os, re, spotipy, lyricsgenius, tweepy
 from random import choice
 from time import sleep
 
-print("SCRIPT IS RUNNING")
-
 def follow_back():
-
   for follower in tweepy.Cursor(api.followers).items():
-
     try:
       follower.follow()
       print('Followed', follower.screen_name, 'back :)')
@@ -15,11 +11,8 @@ def follow_back():
       continue
 
 TWEET_FREQUENCY_MINS = int(os.getenv("TWEET_FREQUENCY_MINS"))
-
 SPOTIFY_USERNAME = os.getenv("USERNAME")
-
 GENIUS_CLIENT_ID = os.getenv("GENIUS_CLIENT_ID")
-
 TWITTER_CONSUMER_KEY = os.getenv("TWITTER_CONSUMER_KEY")
 TWITTER_CONSUMER_SECRET = os.getenv("TWITTER_CONSUMER_SECRET")
 TWITTER_ACCESS_TOKEN = os.getenv("TWITTER_ACCESS_TOKEN")
@@ -44,10 +37,7 @@ while True: # Iterates every 2 minutes checks for a song
     continue
 
   artist_name = current_song['item']['artists'][0]['name']
-
   song_name = current_song['item']['name']
-
-  print('DEBUG_0')
 
   if song_name == last_tweeted:
     print("\nSong already tweeted.\n")
@@ -57,13 +47,12 @@ while True: # Iterates every 2 minutes checks for a song
   print("\n", "   Artist name:", artist_name, end="\n\n")
   print(     "    Song name:", song_name, end="\n\n")
 
+
   #### Get song's lyrics from Genius
 
   genius = lyricsgenius.Genius(GENIUS_CLIENT_ID)
 
   song = genius.search_song(song_name, artist_name)
-
-  print('DEBUG_1')
 
   try:
     lyrics = song.lyrics
@@ -72,7 +61,6 @@ while True: # Iterates every 2 minutes checks for a song
     sleep(60 * TWEET_FREQUENCY_MINS)
     continue
 
-  print('DEBUG_2')
 
   #### Create tweet's text
 
@@ -93,8 +81,6 @@ while True: # Iterates every 2 minutes checks for a song
     trimmed_tweet += "\n\n" + tweet.strip().split("\n")[-1]  # Last Line
     tweet = trimmed_tweet
 
-
-  print('DEBUG_3')
 
   #### Send the tweet with Twitter API
 
