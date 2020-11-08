@@ -6,18 +6,11 @@ def follow_back():
 
   for follower in tweepy.Cursor(api.followers).items():
 
-    try:
-      follower.follow()
+  	try:
+    	follower.follow()
       print('Followed', follower.screen_name, 'back :)')
     except TwitterError:
-      continue    
-
-#  followers=[api.followers()]
-#  following=[api.friends()]
-#  for follower in followers:
-#      if not follower in following:            
-#          api.create_friendship(follower)
-#          print('Followed ' + follower.screen_name + ' back.')
+    	continue
 
 TWEET_FREQUENCY_MINS = int(os.getenv("TWEET_FREQUENCY_MINS"))
 
