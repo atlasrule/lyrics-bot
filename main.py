@@ -3,9 +3,10 @@ from random import choice
 from time import sleep
 
 def follow_back():
-  
+
   for follower in tweepy.Cursor(api.followers).items():
     follower.follow()
+    print('Followed', follower.screen_name, 'back :)')
 
 #  followers=[api.followers()]
 #  following=[api.friends()]
