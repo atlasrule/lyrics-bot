@@ -8,9 +8,9 @@ def follow_back():
 
     try:
       follower.follow()
-    except TwitterError:
-        continue    
       print('Followed', follower.screen_name, 'back :)')
+    except TwitterError:
+      continue    
 
 #  followers=[api.followers()]
 #  following=[api.friends()]
