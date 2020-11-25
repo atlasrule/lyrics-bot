@@ -10,6 +10,7 @@ def follow_back():
     except TwitterError:
       continue
 
+
 TWEET_FREQUENCY_MINS = int(os.getenv("TWEET_FREQUENCY_MINS"))
 SPOTIFY_USERNAME = os.getenv("USERNAME")
 GENIUS_CLIENT_ID = os.getenv("GENIUS_CLIENT_ID")
