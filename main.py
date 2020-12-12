@@ -8,7 +8,7 @@ def follow_back():
     try:
       follower.follow()
       print('Followed', follower.screen_name, 'back :)')
-    except TwitterError:
+    except:
       continue
 
 
@@ -28,7 +28,7 @@ token = spotipy.util.prompt_for_user_token( SPOTIFY_USERNAME, scope)
 
 last_tweeted = ""
 
-while True: # Iterates every 2 minutes checks for a song
+while True: # Iterates every x minutes
 
   sp = spotipy.Spotify(auth=token)
   current_song = sp.currently_playing()
@@ -97,3 +97,15 @@ while True: # Iterates every 2 minutes checks for a song
   follow_back()
 
   sleep(60 * TWEET_FREQUENCY_MINS)
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                  
