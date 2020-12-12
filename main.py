@@ -49,6 +49,8 @@ while True: # Iterates every x minutes
   print("\n", "   Artist name:", artist_name, end="\n\n")
   print(     "    Song name:", song_name, end="\n\n")
 
+  song_name = song_name.split(" - ")[0] # Remove dash identifers
+
 
   #### Get song's lyrics from Genius
 
