@@ -1,4 +1,4 @@
-import os, re, spotipy, lyricsgenius, tweepy
+import os, datetime, re, spotipy, lyricsgenius, tweepy
 from random import choice
 from time import sleep
 
@@ -11,6 +11,37 @@ def follow_back():
     except:
       continue
 
+
+# Create non-repetitive fairy lights
+def create_fairy_lights(length):
+  coloredLights = "🔴🟠🟡🟢🔵🟣"
+  fairyLights = ""
+  lastOne = "x"
+
+  for i in range(length):
+    while True:
+      picked = choice(coloredLights)      
+      if (picked != lastOne):
+        break
+
+    fairyLights += picked
+    lastOne = picked
+
+  return fairyLights
+
+
+def is_it_new_year_time():
+  today = datetime.datetime.today()
+  if today.month == 12 and today.day > 28:
+    return True
+  if today.month == 1 and today.day == 1:
+    return True  
+  else:
+    return False
+
+
+MAX_TWEET_LENGTH = 280
+FAIRY_LENGTH = 11
 
 TWEET_FREQUENCY_MINS = int(os.getenv("TWEET_FREQUENCY_MINS"))
 SPOTIFY_USERNAME = os.getenv("USERNAME")
@@ -80,10 +111,18 @@ while True: # Iterates every x minutes
 
   tweet = choice(lyrics) + "\n\n({} - {})".format(artist_name,  song_name)
 
-  if len(tweet) >= 280:
-    trimmed_tweet = trimmed_tweet = "\n".join(tweet.strip().split("\n")[0:4])  # First 4 lines
-    trimmed_tweet += "\n\n" + tweet.strip().split("\n")[-1]  # Last Line
-    tweet = trimmed_tweet
+
+if is_it_new_year_time():
+  MAX_TWEET_LENGTH -= FAIRY_LENGTH*2 + 2
+
+if len(tweet) >= MAX_TWEET_LENGTH:
+  # First 4 lines
+  trimmed_tweet = trimmed_tweet = "\n".join(tweet.strip().split("\n")[0:4])  
+  trimmed_tweet += "\n\n" + tweet.strip().split("\n")[-1]  # Last Line
+  tweet = trimmed_tweet
+
+if is_it_new_year_time():
+  tweet = create_fairy_lights(FAIRY_LENGTH)+'\n'+tweet+'\n'+create_fairy_lights(FAIRY_LENGTH)
 
 
   #### Send the tweet with Twitter API
