@@ -39,6 +39,7 @@ def is_it_new_year_time():
   else:
     return False
 
+not_first_run = False
 
 MAX_TWEET_LENGTH = 280
 FAIRY_LENGTH = 11
@@ -60,6 +61,10 @@ token = spotipy.util.prompt_for_user_token( SPOTIFY_USERNAME, scope)
 last_tweeted = ""
 
 while True: # Iterates every x minutes
+
+  if not_first_run:
+    sleep(60 * TWEET_FREQUENCY_MINS)
+    not_first_run = True
 
   sp = spotipy.Spotify(auth=token)
   current_song = sp.currently_playing()
@@ -136,17 +141,3 @@ if is_it_new_year_time():
   last_tweeted = song_name
 
   follow_back()
-
-  sleep(60 * TWEET_FREQUENCY_MINS)
-
-
-
-
-
-
-
-
-
-
-
-                                                                                                  
