@@ -81,7 +81,7 @@ while True: # Iterates every x minutes
   song_name = song_name.split(' (', 1)[0] # Delete paranthesis
 
   if song_name == last_tweeted:
-    print("\nSong already tweeted.\n")
+    print("\nThe song already tweeted.\n")
     continue
 
   print("\n", "   Artist name:", artist_name, end="\n\n")
@@ -122,7 +122,7 @@ while True: # Iterates every x minutes
 
   if len(tweet) >= MAX_TWEET_LENGTH:
     # First 4 lines
-    trimmed_tweet = trimmed_tweet = "\n".join(tweet.strip().split("\n")[0:4])  
+    trimmed_tweet = "\n".join(tweet.strip().split("\n")[0:4])  
     trimmed_tweet += "\n\n" + tweet.strip().split("\n")[-1]  # Last Line
     tweet = trimmed_tweet
 
