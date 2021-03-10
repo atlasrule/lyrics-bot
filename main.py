@@ -78,7 +78,7 @@ while True: # Iterates every x minutes
   artist_name = current_song['item']['artists'][0]['name']
   song_name = current_song['item']['name']
 
-  song_name = song_name.split('(', 1)[0] # Delete paranthesis
+  song_name = song_name.split(' (', 1)[0] # Delete paranthesis
 
   if song_name == last_tweeted:
     print("\nSong already tweeted.\n")
