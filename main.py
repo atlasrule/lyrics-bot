@@ -132,7 +132,7 @@ if is_it_new_year_time():
 
   #### Send the tweet with Twitter API
 
-  auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY,  TWITTER_CONSUMER_SECRET)
+  auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
   auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET)
   api = tweepy.API(auth)
 
