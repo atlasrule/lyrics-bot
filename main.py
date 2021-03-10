@@ -73,15 +73,15 @@ while True: # Iterates every x minutes
 
   if current_song == None:
     print("\nNot listening anything.\n")
-    sleep(60 * TWEET_FREQUENCY_MINS)
     continue
 
   artist_name = current_song['item']['artists'][0]['name']
   song_name = current_song['item']['name']
 
+  song_name = song_name.split('(', 1)[0] # Delete paranthesis
+
   if song_name == last_tweeted:
     print("\nSong already tweeted.\n")
-    sleep(60 * TWEET_FREQUENCY_MINS)
     continue
 
   print("\n", "   Artist name:", artist_name, end="\n\n")
@@ -100,7 +100,6 @@ while True: # Iterates every x minutes
     lyrics = song.lyrics
   except ( AttributeError): #if return None
     print("\nCouldn't get lyrics.\n")
-    sleep(60 * TWEET_FREQUENCY_MINS)
     continue
 
 
@@ -116,7 +115,7 @@ while True: # Iterates every x minutes
   for paragraph in lyrics:
     print(paragraph, "\n\n","*"*25)
 
-  tweet = choice(lyrics) + "\n\n({} - {})".format(artist_name,  song_name)
+  tweet = choice(lyrics) + "\n\n({} - {})".format(artist_name, song_name)
 
   if is_it_new_year_time():
     MAX_TWEET_LENGTH -= FAIRY_LENGTH*2 + 2
