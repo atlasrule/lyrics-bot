@@ -64,7 +64,7 @@ last_tweeted = ""
 while True: # Iterates every x minutes
 
   if not first_run:
-    sleep(60 * uniform(0, 2*TWEET_FREQUENCY_MINS))
+    sleep(60 * uniform(5, 2*TWEET_FREQUENCY_MINS - 5))
       
   first_run = False
 
