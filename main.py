@@ -39,7 +39,7 @@ def is_it_new_year_time():
   else:
     return False
 
-not_first_run = False
+first_run = True
 
 MAX_TWEET_LENGTH = 280
 FAIRY_LENGTH = 11
@@ -62,9 +62,10 @@ last_tweeted = ""
 
 while True: # Iterates every x minutes
 
-  if not_first_run:
+  if not first_run:
     sleep(60 * TWEET_FREQUENCY_MINS)
-    not_first_run = True
+      
+  first_run = False
 
   sp = spotipy.Spotify(auth=token)
   current_song = sp.currently_playing()
@@ -116,18 +117,17 @@ while True: # Iterates every x minutes
 
   tweet = choice(lyrics) + "\n\n({} - {})".format(artist_name,  song_name)
 
+  if is_it_new_year_time():
+    MAX_TWEET_LENGTH -= FAIRY_LENGTH*2 + 2
 
-if is_it_new_year_time():
-  MAX_TWEET_LENGTH -= FAIRY_LENGTH*2 + 2
+  if len(tweet) >= MAX_TWEET_LENGTH:
+    # First 4 lines
+    trimmed_tweet = trimmed_tweet = "\n".join(tweet.strip().split("\n")[0:4])  
+    trimmed_tweet += "\n\n" + tweet.strip().split("\n")[-1]  # Last Line
+    tweet = trimmed_tweet
 
-if len(tweet) >= MAX_TWEET_LENGTH:
-  # First 4 lines
-  trimmed_tweet = trimmed_tweet = "\n".join(tweet.strip().split("\n")[0:4])  
-  trimmed_tweet += "\n\n" + tweet.strip().split("\n")[-1]  # Last Line
-  tweet = trimmed_tweet
-
-if is_it_new_year_time():
-  tweet = create_fairy_lights(FAIRY_LENGTH)+'\n'+tweet+'\n'+create_fairy_lights(FAIRY_LENGTH)
+  if is_it_new_year_time():
+    tweet = create_fairy_lights(FAIRY_LENGTH)+'\n'+tweet+'\n'+create_fairy_lights(FAIRY_LENGTH)
 
 
   #### Send the tweet with Twitter API
