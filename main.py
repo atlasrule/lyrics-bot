@@ -1,4 +1,5 @@
 import os, datetime, re, spotipy, lyricsgenius, tweepy
+from random import uniform
 from random import choice
 from time import sleep
 
@@ -63,7 +64,7 @@ last_tweeted = ""
 while True: # Iterates every x minutes
 
   if not first_run:
-    sleep(60 * TWEET_FREQUENCY_MINS)
+    sleep(60 * uniform(0, 2*TWEET_FREQUENCY_MINS))
       
   first_run = False
 
