@@ -115,6 +115,14 @@ while True: # Iterates every x minutes
   for paragraph in lyrics:
     print(paragraph, "\n\n","*"*25)
 
+    # Remove empty paragraphs
+    if len(paragraph) < 3: lyrics.remove(paragraph)
+
+  # Don't post if lyrics only includes 'instrumental'
+  if len(lyrics) <= 1 and 'Instrumental' in lyrics[0].split(' ')[0]:
+    print("\nTrack is Instrumental.\n")
+    continue
+
   tweet = choice(lyrics) + "\n\n({} - {})".format(artist_name, song_name)
 
   if is_it_new_year_time():
