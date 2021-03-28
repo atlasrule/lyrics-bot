@@ -2,6 +2,7 @@ import os, datetime, re, spotipy, lyricsgenius, tweepy
 from random import uniform
 from random import choice
 from time import sleep
+from mastodon import Mastodon
 
 
 def follow_back():
@@ -52,6 +53,7 @@ TWITTER_CONSUMER_KEY = os.getenv("TWITTER_CONSUMER_KEY")
 TWITTER_CONSUMER_SECRET = os.getenv("TWITTER_CONSUMER_SECRET")
 TWITTER_ACCESS_TOKEN = os.getenv("TWITTER_ACCESS_TOKEN")
 TWITTER_ACCESS_SECRET = os.getenv("TWITTER_ACCESS_SECRET")
+MASTODON_ACCESS_TOKEN = os.getenv("MASTODON_ACCESS_TOKEN")
 
 #### Get current listening data from Spotify
 
@@ -85,7 +87,7 @@ while True: # Iterates every x minutes
     continue
 
   print("\n", "   Artist name:", artist_name, end="\n\n")
-  print(     "    Song naemmmmmmm:", song_name, end="\n\n")
+  print(     "    Song name:", song_name, end="\n\n")
 
   song_name = song_name.split(" - ")[0] # Remove dash identifers
 
@@ -145,6 +147,19 @@ while True: # Iterates every x minutes
   api = tweepy.API(auth)
 
   api.update_status(tweet)  # Tweet the verse
+
+
+  #### Send the tweet with Mastodon API
+  
+  mastodon = Mastodon(
+      access_token = MASTODON_ACCESS_TOKEN,
+      api_base_url = 'https://botsin.space/'
+  )
+
+  mastodon.status_post(tweet)
+
+  #TODO: Follow back for Mastodon. 
+
 
   last_tweeted = song_name
 
