@@ -20,3 +20,4 @@ soupsieve==2.0.1
 spotipy==2.16.1
 tweepy==3.9.0
 urllib3==1.25.11
+Mastodon.py==1.5.1
