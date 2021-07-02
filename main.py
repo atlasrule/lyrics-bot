@@ -110,6 +110,16 @@ while True: # Iterates every x minutes
   lyrics = re.sub(r'[\(\[].*?[\)\]]', '', lyrics)  # Remove lyric identifiers
   lyrics = lyrics.replace('[','').replace(']','')
 
+  lyrics = lyrics.replace("""
+Embed
+Share Url
+:
+Copy
+Embed
+:
+Copy
+    """, "")
+
   lyrics = re.sub(r'[\n]{2,}', '\n\n', lyrics)  # Standardize paragraph spacing
 
   lyrics = lyrics.split("\n\n")  # Split lyrics into paragraphs
