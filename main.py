@@ -110,15 +110,10 @@ while True: # Iterates every x minutes
   lyrics = re.sub(r'[\(\[].*?[\)\]]', '', lyrics)  # Remove lyric identifiers
   lyrics = lyrics.replace('[','').replace(']','')
 
-  lyrics = lyrics.replace("""
-Embed
-Share Url
-:
-Copy
-Embed
-:
-Copy
-    """, "")
+  stopwords = ['Embed', 'Share Url', ':', 'Copy',]
+
+  for stopword in stopwords:
+    lyrics = lyrics.replace(stopword, '')
 
   lyrics = re.sub(r'[\n]{2,}', '\n\n', lyrics)  # Standardize paragraph spacing
 
