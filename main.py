@@ -110,7 +110,7 @@ while True: # Iterates every x minutes
   lyrics = re.sub(r'[\(\[].*?[\)\]]', '', lyrics)  # Remove lyric identifiers
   lyrics = lyrics.replace('[','').replace(']','')
 
-  stopwords = ['Embed', 'Share Url', ':', 'Copy',]
+  stopwords = ['Embed', 'Share Url', ':', 'Copy', 'Share URL']
 
   for stopword in stopwords:
     lyrics = lyrics.replace(stopword, '')
