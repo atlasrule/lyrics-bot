@@ -130,7 +130,7 @@ while True: # Iterates every x minutes
     print("\nTrack is Instrumental.\n")
     continue
 
-  tweet = choice(lyrics) + "\n\n({} - {})".format(artist_name, song_name)
+  tweet = choice(lyrics) + "\n\n{} - {}".format(artist_name, song_name)
 
   if is_it_new_year_time():
     MAX_TWEET_LENGTH -= FAIRY_LENGTH*2 + 2
