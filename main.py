@@ -1,4 +1,4 @@
-import os, datetime, re, spotipy, lyricsgenius, tweepy
+import os, datetime, re, spotipy, lyricsgenius, tweepy, string
 from random import uniform
 from random import choice
 from time import sleep
@@ -114,6 +114,9 @@ while True: # Iterates every x minutes
 
   for stopword in stopwords:
     lyrics = lyrics.replace(stopword, '')
+
+  
+  lyrics = lyrics.rstrip(string.digits) # Remove genius' number shit
 
   lyrics = re.sub(r'[\n]{2,}', '\n\n', lyrics)  # Standardize paragraph spacing
 
