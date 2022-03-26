@@ -118,6 +118,10 @@ while True: # Iterates every x minutes
   
   lyrics = lyrics.rstrip(string.digits) # Remove genius' number shit
 
+  lyrics = re.sub(r'^.*?Lyrics', '', lyrics) # Remove genius' "xyz Lyrics" shit
+
+  Utanmazsan Unutmam Lyrics
+
   lyrics = re.sub(r'[\n]{2,}', '\n\n', lyrics)  # Standardize paragraph spacing
 
   lyrics = lyrics.split("\n\n")  # Split lyrics into paragraphs
