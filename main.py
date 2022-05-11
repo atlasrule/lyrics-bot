@@ -84,6 +84,7 @@ while True: # Iterates every x minutes
   listening = True
 
 
+  
   # Get current listening data from Spotify
   sp = spotipy.Spotify(auth=token)
   current_song = sp.currently_playing()
