@@ -1,4 +1,5 @@
 import os, datetime, re, spotipy, lyricsgenius, tweepy, string
+from ytmusicapi import YTMusic
 from random import uniform
 from random import choice
 from time import sleep
@@ -63,22 +64,39 @@ token = spotipy.util.prompt_for_user_token( SPOTIFY_USERNAME, scope)
 
 last_tweeted = ""
 
+
 while True: # Iterates every x minutes
 
   if not first_run:
     sleep(60 * uniform(5, 2*TWEET_FREQUENCY_MINS - 5))
       
   first_run = False
+  listening = False
 
+
+  # Get current listening data from Youtube Music
+  ytmusic = YTMusic('headers_auth.json')
+
+  #if ytmusic.get_history().played:
+  print( ytmusic.get_history().played )
+  artist_name = ytmusic.get_history()[0]['artists'][0]['name']
+  song_name = ytmusic.get_history()[0]['title']
+  listening = True
+
+
+  # Get current listening data from Spotify
   sp = spotipy.Spotify(auth=token)
   current_song = sp.currently_playing()
 
-  if current_song == None:
-    print("\nNot listening anything.\n")
-    continue
+  if current_song != None:
+    artist_name = current_song['item']['artists'][0]['name']
+    song_name = current_song['item']['name']
 
-  artist_name = current_song['item']['artists'][0]['name']
-  song_name = current_song['item']['name']
+
+
+  if not listening:
+    print("Not listening anything.\n")
+    continue
 
   song_name = song_name.split(' (', 1)[0] # Delete paranthesis
 
